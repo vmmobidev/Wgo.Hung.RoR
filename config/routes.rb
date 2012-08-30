@@ -6,6 +6,7 @@ WgoHungRor::Application.routes.draw do
   match 'users/authenticate' => 'users#authenticate', :as => :authenticate
   match 'users/insertUser' => 'users#insertUser', :as => :insertUser
   match 'users/:id/update' => 'users#update', :as => :update
+  match 'festivals/destroy/:id' => 'festivals#destroy', :as => :destroy
   
   resources :users
 

@@ -43,6 +43,17 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    puts request.params[:user]["id"] #[:id].to_i
+    puts params[:user]
+    puts '************************************************************'
+    if request.params[:user]["id"]
+      puts 'Into the if loop'
+      params[:user] = JSON.parse(params[:user])
+      puts params[:user]
+    end
+    puts '************************************************************'
+    puts params[:user]
+
     @user = User.new(params[:user])
 
     respond_to do |format|
@@ -130,7 +141,6 @@ class UsersController < ApplicationController
   # http://wgo-hung-ror.herokuapp.com/users/editUser
   def editUser
      @user = User.find(params[:id])              
-     @user.update_attributes(:username => params[:username], :password => params[:password], :email => params[:email] )
     if(@user.update_attributes(:username => params[:username], :password => params[:password], :email => params[:email] ))
       respond_to do |format| 
           format.html { render :json => {:Success => true}, :callback => params[:callback] }
